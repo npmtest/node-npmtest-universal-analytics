@@ -1,0 +1,1916 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for node-npmtest-universal-analytics/universal-analytics/lib/index.js</title>
+    <meta charset="utf-8">
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Arial, Helvetica;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            height: 160px;
+            padding: 0 1em 0 1em;
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 170px;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Menlo, Monaco, Consolas, Courier New, monospace;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { color: #000; }
+        div.coverage-summary a:visited { color: #333; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1 style="font-weight: bold;">
+        <a href="https://github.com/npmtest/node-npmtest-universal-analytics">npmtest-universal-analytics (v0.0.1)</a>
+    </h1>
+    <h1>Code coverage report for <span class="entity">node-npmtest-universal-analytics/universal-analytics/lib/index.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">5.45% <small>(18 / 330)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">0% <small>(0 / 302)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">0% <small>(0 / 31)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">5.54% <small>(18 / 325)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../index.html">All files</a> &#187; <a href="index.html">node-npmtest-universal-analytics/universal-analytics/lib/</a> &#187; index.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
+517
+518
+519
+520
+521
+522
+523
+524
+525
+526
+527
+528
+529
+530
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556
+557
+558
+559
+560
+561
+562
+563
+564
+565</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">&nbsp;
+var async = require("async");
+var _ = require("underscore");
+var request = require("request");
+var uuid = require("uuid");
+var querystring = require("querystring");
+&nbsp;
+var utils = require("./utils");
+var config = require("./config");
+var url = require("url");
+&nbsp;
+module.exports = init;
+&nbsp;
+&nbsp;
+<span class="fstat-no" title="function not covered" >function init (tid, cid, options) {</span>
+<span class="cstat-no" title="statement not covered" >  return new Visitor(tid, cid, options);</span>
+}
+&nbsp;
+var Visitor = module.exports.Visitor = <span class="fstat-no" title="function not covered" >function (tid, cid, options, context, persistentParams) {</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  if (typeof tid === 'object') {</span>
+<span class="cstat-no" title="statement not covered" >    options = tid;</span>
+<span class="cstat-no" title="statement not covered" >    tid = cid = null;</span>
+  } else <span class="cstat-no" title="statement not covered" >if (typeof cid === 'object') {</span>
+<span class="cstat-no" title="statement not covered" >    options = cid;</span>
+<span class="cstat-no" title="statement not covered" >    cid = null;</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  this._queue = [];</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  this.options = options || {};</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  if(this.options.hostname) {</span>
+<span class="cstat-no" title="statement not covered" >    config.hostname = this.options.hostname;</span>
+  }
+<span class="cstat-no" title="statement not covered" >  if(this.options.path) {</span>
+<span class="cstat-no" title="statement not covered" >    config.path = this.options.path;</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  if (this.options.https) {</span>
+<span class="cstat-no" title="statement not covered" >    var parsedHostname = url.parse(config.hostname);</span>
+<span class="cstat-no" title="statement not covered" >    config.hostname = 'https://' + parsedHostname.host;</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  if(this.options.enableBatching !== undefined) {</span>
+<span class="cstat-no" title="statement not covered" >    config.batching = options.enableBatching;</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  if(this.options.batchSize) {</span>
+<span class="cstat-no" title="statement not covered" >    config.batchSize = this.options.batchSize;</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  this._context = context || {};</span>
+<span class="cstat-no" title="statement not covered" >  this._persistentParams = persistentParams || {};</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  this.tid = tid || this.options.tid;</span>
+<span class="cstat-no" title="statement not covered" >  this.cid = this._determineCid(cid, this.options.cid, (this.options.strictCidFormat !== false));</span>
+<span class="cstat-no" title="statement not covered" >  if(this.options.uid) {</span>
+<span class="cstat-no" title="statement not covered" >    this.uid = this.options.uid;</span>
+  }
+}
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+module.exports.middleware = <span class="fstat-no" title="function not covered" >function (tid, options) {</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  this.tid = tid;</span>
+<span class="cstat-no" title="statement not covered" >  this.options = options;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  var cookieName = (this.options || {}).cookieName || "_ga";</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  return <span class="fstat-no" title="function not covered" >function (req, res, next) {</span></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    req.visitor = module.exports.createFromSession(req.session);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (req.visitor) <span class="cstat-no" title="statement not covered" >return next();</span></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    var cid;</span>
+<span class="cstat-no" title="statement not covered" >    if (req.cookies &amp;&amp; req.cookies[cookieName]) {</span>
+<span class="cstat-no" title="statement not covered" >      var gaSplit = req.cookies[cookieName].split('.');</span>
+<span class="cstat-no" title="statement not covered" >      cid = gaSplit[2] + "." + gaSplit[3];</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    req.visitor = init(tid, cid, options);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (req.session) {</span>
+<span class="cstat-no" title="statement not covered" >      req.session.cid = req.visitor.cid;</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    next();</span>
+  }
+}
+&nbsp;
+&nbsp;
+&nbsp;
+module.exports.createFromSession = <span class="fstat-no" title="function not covered" >function (session) {</span>
+<span class="cstat-no" title="statement not covered" >  if (session &amp;&amp; session.cid) {</span>
+<span class="cstat-no" title="statement not covered" >    return init(this.tid, session.cid, this.options);</span>
+  }
+}
+&nbsp;
+&nbsp;
+&nbsp;
+Visitor.prototype = {
+&nbsp;
+  debug: <span class="fstat-no" title="function not covered" >function (debug) {</span>
+<span class="cstat-no" title="statement not covered" >    this.options.debug = arguments.length === 0 ? true : debug;</span>
+<span class="cstat-no" title="statement not covered" >    this._log("Logging enabled")</span>
+<span class="cstat-no" title="statement not covered" >    return this;</span>
+  },
+&nbsp;
+&nbsp;
+  reset: <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >    this._context = null;</span>
+<span class="cstat-no" title="statement not covered" >    return this;</span>
+  },
+&nbsp;
+  set: <span class="fstat-no" title="function not covered" >function (key, value) {</span>
+<span class="cstat-no" title="statement not covered" >    this._persistentParams = this._persistentParams || {};</span>
+<span class="cstat-no" title="statement not covered" >    this._persistentParams[key] = value;</span>
+  },
+&nbsp;
+  pageview: <span class="fstat-no" title="function not covered" >function (path, hostname, title, params, fn) {</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (typeof path === 'object' &amp;&amp; path != null) {</span>
+<span class="cstat-no" title="statement not covered" >      params = path;</span>
+<span class="cstat-no" title="statement not covered" >      if (typeof hostname === 'function') {</span>
+<span class="cstat-no" title="statement not covered" >        fn = hostname</span>
+      }
+<span class="cstat-no" title="statement not covered" >      path = hostname = title  = null;</span>
+    } else <span class="cstat-no" title="statement not covered" >if (typeof hostname === 'function') {</span>
+<span class="cstat-no" title="statement not covered" >      fn = hostname</span>
+<span class="cstat-no" title="statement not covered" >      hostname = title = null;</span>
+    } else <span class="cstat-no" title="statement not covered" >if (typeof title === 'function') {</span>
+<span class="cstat-no" title="statement not covered" >      fn = title;</span>
+<span class="cstat-no" title="statement not covered" >      title = null;</span>
+    } else <span class="cstat-no" title="statement not covered" >if (typeof params === 'function') {</span>
+<span class="cstat-no" title="statement not covered" >      fn = params;</span>
+<span class="cstat-no" title="statement not covered" >      params = null;</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    params = this._translateParams(params);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    params = _.extend({}, this._persistentParams || {}, params);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    params.dp = path || params.dp || this._context.dp;</span>
+<span class="cstat-no" title="statement not covered" >    params.dh = hostname || params.dh || this._context.dh;</span>
+<span class="cstat-no" title="statement not covered" >    params.dt = title || params.dt || this._context.dt;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this._tidyParameters(params);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (!params.dp &amp;&amp; !params.dl) {</span>
+<span class="cstat-no" title="statement not covered" >      return this._handleError("Please provide either a page path (dp) or a document location (dl)", fn);</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return this._withContext(params)._enqueue("pageview", params, fn);</span>
+  },
+&nbsp;
+&nbsp;
+  screenview: <span class="fstat-no" title="function not covered" >function (screenName, appName, appVersion, appId, appInstallerId, params, fn) {</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      if (typeof screenName === 'object' &amp;&amp; screenName != null) {</span>
+<span class="cstat-no" title="statement not covered" >          params = screenName;</span>
+<span class="cstat-no" title="statement not covered" >          if (typeof appName === 'function') {</span>
+<span class="cstat-no" title="statement not covered" >              fn = appName</span>
+          }
+<span class="cstat-no" title="statement not covered" >          screenName = appName = appVersion = appId = appInstallerId = null;</span>
+      } else <span class="cstat-no" title="statement not covered" >if (typeof appName === 'function') {</span>
+<span class="cstat-no" title="statement not covered" >          fn = appName</span>
+<span class="cstat-no" title="statement not covered" >          appName = appVersion = appId = appInstallerId = null;</span>
+      } else <span class="cstat-no" title="statement not covered" >if (typeof appVersion === 'function') {</span>
+<span class="cstat-no" title="statement not covered" >          fn = appVersion;</span>
+<span class="cstat-no" title="statement not covered" >          appVersion = appId = appInstallerId = null;</span>
+      } else <span class="cstat-no" title="statement not covered" >if (typeof appId === 'function') {</span>
+<span class="cstat-no" title="statement not covered" >          fn = appId;</span>
+<span class="cstat-no" title="statement not covered" >          appId = appInstallerId = null;</span>
+      } else <span class="cstat-no" title="statement not covered" >if (typeof appInstallerId === 'function') {</span>
+<span class="cstat-no" title="statement not covered" >          fn = appInstallerId;</span>
+<span class="cstat-no" title="statement not covered" >          appInstallerId = null;</span>
+      } else <span class="cstat-no" title="statement not covered" >if (typeof params === 'function') {</span>
+<span class="cstat-no" title="statement not covered" >          fn = params;</span>
+<span class="cstat-no" title="statement not covered" >          params = null;</span>
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      params = this._translateParams(params);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      params = _.extend({}, this._persistentParams || {}, params);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      params.cd = screenName || params.cd || this._context.cd;</span>
+<span class="cstat-no" title="statement not covered" >      params.an = appName || params.an || this._context.an;</span>
+<span class="cstat-no" title="statement not covered" >      params.av = appVersion || params.av || this._context.av;</span>
+<span class="cstat-no" title="statement not covered" >      params.aid = appId || params.aid || this._context.aid;</span>
+<span class="cstat-no" title="statement not covered" >      params.aiid = appInstallerId || params.aiid || this._context.aiid;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      this._tidyParameters(params);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      if (!params.cd || !params.an) {</span>
+<span class="cstat-no" title="statement not covered" >          return this._handleError("Please provide at least a screen name (cd) and an app name (an)", fn);</span>
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      return this._withContext(params)._enqueue("screenview", params, fn);</span>
+  },
+&nbsp;
+&nbsp;
+  event: <span class="fstat-no" title="function not covered" >function (category, action, label, value, params, fn) {</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (typeof category === 'object' &amp;&amp; category != null) {</span>
+<span class="cstat-no" title="statement not covered" >      params = category;</span>
+<span class="cstat-no" title="statement not covered" >      if (typeof action === 'function') {</span>
+<span class="cstat-no" title="statement not covered" >        fn = action</span>
+      }
+<span class="cstat-no" title="statement not covered" >      category = action = label = value = null;</span>
+    } else <span class="cstat-no" title="statement not covered" >if (typeof label === 'function') {</span>
+<span class="cstat-no" title="statement not covered" >      fn = label;</span>
+<span class="cstat-no" title="statement not covered" >      label = value = null;</span>
+    } else <span class="cstat-no" title="statement not covered" >if (typeof value === 'function') {</span>
+<span class="cstat-no" title="statement not covered" >      fn = value;</span>
+<span class="cstat-no" title="statement not covered" >      value = null;</span>
+    } else <span class="cstat-no" title="statement not covered" >if (typeof params === 'function') {</span>
+<span class="cstat-no" title="statement not covered" >      fn = params;</span>
+<span class="cstat-no" title="statement not covered" >      params = null;</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    params = this._translateParams(params);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    params = _.extend({}, this._persistentParams || {}, params);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    params.ec = category || params.ec || this._context.ec;</span>
+<span class="cstat-no" title="statement not covered" >    params.ea = action || params.ea || this._context.ea;</span>
+<span class="cstat-no" title="statement not covered" >    params.el = label || params.el || this._context.el;</span>
+<span class="cstat-no" title="statement not covered" >    params.ev = value || params.ev || this._context.ev;</span>
+<span class="cstat-no" title="statement not covered" >    params.p = params.p || params.dp || this._context.p || this._context.dp;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    delete params.dp;</span>
+<span class="cstat-no" title="statement not covered" >    this._tidyParameters(params);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (!params.ec || !params.ea) {</span>
+<span class="cstat-no" title="statement not covered" >      return this._handleError("Please provide at least an event category (ec) and an event action (ea)", fn);</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return this._withContext(params)._enqueue("event", params, fn);</span>
+  },
+&nbsp;
+&nbsp;
+  transaction: <span class="fstat-no" title="function not covered" >function (transaction, revenue, shipping, tax, affiliation, params, fn) {</span>
+<span class="cstat-no" title="statement not covered" >    if (typeof transaction === 'object') {</span>
+<span class="cstat-no" title="statement not covered" >      params = transaction;</span>
+<span class="cstat-no" title="statement not covered" >      if (typeof revenue === 'function') {</span>
+<span class="cstat-no" title="statement not covered" >        fn = revenue</span>
+      }
+<span class="cstat-no" title="statement not covered" >      transaction = revenue = shipping = tax = affiliation = null;</span>
+    } else <span class="cstat-no" title="statement not covered" >if (typeof revenue === 'function') {</span>
+<span class="cstat-no" title="statement not covered" >      fn = revenue;</span>
+<span class="cstat-no" title="statement not covered" >      revenue = shipping = tax = affiliation = null;</span>
+    } else <span class="cstat-no" title="statement not covered" >if (typeof shipping === 'function') {</span>
+<span class="cstat-no" title="statement not covered" >      fn = shipping;</span>
+<span class="cstat-no" title="statement not covered" >      shipping = tax = affiliation = null;</span>
+    } else <span class="cstat-no" title="statement not covered" >if (typeof tax === 'function') {</span>
+<span class="cstat-no" title="statement not covered" >      fn = tax;</span>
+<span class="cstat-no" title="statement not covered" >      tax = affiliation = null;</span>
+    } else <span class="cstat-no" title="statement not covered" >if (typeof affiliation === 'function') {</span>
+<span class="cstat-no" title="statement not covered" >      fn = affiliation;</span>
+<span class="cstat-no" title="statement not covered" >      affiliation = null;</span>
+    } else <span class="cstat-no" title="statement not covered" >if (typeof params === 'function') {</span>
+<span class="cstat-no" title="statement not covered" >      fn = params;</span>
+<span class="cstat-no" title="statement not covered" >      params = null;</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    params = this._translateParams(params);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    params = _.extend({}, this._persistentParams || {}, params);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    params.ti = transaction || params.ti || this._context.ti;</span>
+<span class="cstat-no" title="statement not covered" >    params.tr = revenue || params.tr || this._context.tr;</span>
+<span class="cstat-no" title="statement not covered" >    params.ts = shipping || params.ts || this._context.ts;</span>
+<span class="cstat-no" title="statement not covered" >    params.tt = tax || params.tt || this._context.tt;</span>
+<span class="cstat-no" title="statement not covered" >    params.ta = affiliation || params.ta || this._context.ta;</span>
+<span class="cstat-no" title="statement not covered" >    params.p = params.p || this._context.p || this._context.dp;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this._tidyParameters(params);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (!params.ti) {</span>
+<span class="cstat-no" title="statement not covered" >      return this._handleError("Please provide at least a transaction ID (ti)", fn);</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return this._withContext(params)._enqueue("transaction", params, fn);</span>
+  },
+&nbsp;
+&nbsp;
+  item: <span class="fstat-no" title="function not covered" >function (price, quantity, sku, name, variation, params, fn) {</span>
+<span class="cstat-no" title="statement not covered" >    if (typeof price === 'object') {</span>
+<span class="cstat-no" title="statement not covered" >      params = price;</span>
+<span class="cstat-no" title="statement not covered" >      if (typeof quantity === 'function') {</span>
+<span class="cstat-no" title="statement not covered" >        fn = quantity</span>
+      }
+<span class="cstat-no" title="statement not covered" >      price = quantity = sku = name = variation = null;</span>
+    } else <span class="cstat-no" title="statement not covered" >if (typeof quantity === 'function') {</span>
+<span class="cstat-no" title="statement not covered" >      fn = quantity;</span>
+<span class="cstat-no" title="statement not covered" >      quantity = sku = name = variation = null;</span>
+    } else <span class="cstat-no" title="statement not covered" >if (typeof sku === 'function') {</span>
+<span class="cstat-no" title="statement not covered" >      fn = sku;</span>
+<span class="cstat-no" title="statement not covered" >      sku = name = variation = null;</span>
+    } else <span class="cstat-no" title="statement not covered" >if (typeof name === 'function') {</span>
+<span class="cstat-no" title="statement not covered" >      fn = name;</span>
+<span class="cstat-no" title="statement not covered" >      name = variation = null;</span>
+    } else <span class="cstat-no" title="statement not covered" >if (typeof variation === 'function') {</span>
+<span class="cstat-no" title="statement not covered" >      fn = variation;</span>
+<span class="cstat-no" title="statement not covered" >      variation = null;</span>
+    } else <span class="cstat-no" title="statement not covered" >if (typeof params === 'function') {</span>
+<span class="cstat-no" title="statement not covered" >      fn = params;</span>
+<span class="cstat-no" title="statement not covered" >      params = null;</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    params = this._translateParams(params);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    params = _.extend({}, this._persistentParams || {}, params);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    params.ip = price || params.ip || this._context.ip;</span>
+<span class="cstat-no" title="statement not covered" >    params.iq = quantity || params.iq || this._context.iq;</span>
+<span class="cstat-no" title="statement not covered" >    params.ic = sku || params.ic || this._context.ic;</span>
+<span class="cstat-no" title="statement not covered" >    params.in = name || params.in || this._context.in;</span>
+<span class="cstat-no" title="statement not covered" >    params.iv = variation || params.iv || this._context.iv;</span>
+<span class="cstat-no" title="statement not covered" >    params.p = params.p || this._context.p || this._context.dp;</span>
+<span class="cstat-no" title="statement not covered" >    params.ti = params.ti || this._context.ti;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this._tidyParameters(params);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (!params.ti) {</span>
+<span class="cstat-no" title="statement not covered" >      return this._handleError("Please provide at least an item transaction ID (ti)", fn);</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return this._withContext(params)._enqueue("item", params, fn);</span>
+&nbsp;
+  },
+&nbsp;
+  exception: <span class="fstat-no" title="function not covered" >function (description, fatal, params, fn) {</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (typeof description === 'object') {</span>
+<span class="cstat-no" title="statement not covered" >      params = description;</span>
+<span class="cstat-no" title="statement not covered" >      if (typeof fatal === 'function') {</span>
+<span class="cstat-no" title="statement not covered" >        fn = fatal;</span>
+      }
+<span class="cstat-no" title="statement not covered" >      description = fatal = null;</span>
+    } else <span class="cstat-no" title="statement not covered" >if (typeof fatal === 'function') {</span>
+<span class="cstat-no" title="statement not covered" >      fn = fatal;</span>
+<span class="cstat-no" title="statement not covered" >      fatal = 0;</span>
+    } else <span class="cstat-no" title="statement not covered" >if (typeof params === 'function') {</span>
+<span class="cstat-no" title="statement not covered" >      fn = params;</span>
+<span class="cstat-no" title="statement not covered" >      params = null;</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    params = this._translateParams(params);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    params = _.extend({}, this._persistentParams || {}, params);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    params.exd = description || params.exd || this._context.exd;</span>
+<span class="cstat-no" title="statement not covered" >    params.exf = +!!(fatal || params.exf || this._context.exf);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (params.exf === 0) {</span>
+<span class="cstat-no" title="statement not covered" >      delete params.exf;</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this._tidyParameters(params);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return this._withContext(params)._enqueue("exception", params, fn);</span>
+  },
+&nbsp;
+  timing: <span class="fstat-no" title="function not covered" >function (category, variable, time, label, params, fn) {</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (typeof category === 'object') {</span>
+<span class="cstat-no" title="statement not covered" >      params = category;</span>
+<span class="cstat-no" title="statement not covered" >      if (typeof variable === 'function') {</span>
+<span class="cstat-no" title="statement not covered" >        fn = variable;</span>
+      }
+<span class="cstat-no" title="statement not covered" >      category = variable = time = label = null;</span>
+    } else <span class="cstat-no" title="statement not covered" >if (typeof variable === 'function') {</span>
+<span class="cstat-no" title="statement not covered" >      fn = variable;</span>
+<span class="cstat-no" title="statement not covered" >      variable = time = label = null;</span>
+    } else <span class="cstat-no" title="statement not covered" >if (typeof time === 'function') {</span>
+<span class="cstat-no" title="statement not covered" >      fn = time;</span>
+<span class="cstat-no" title="statement not covered" >      time = label = null;</span>
+    } else <span class="cstat-no" title="statement not covered" >if (typeof label === 'function') {</span>
+<span class="cstat-no" title="statement not covered" >      fn = label;</span>
+<span class="cstat-no" title="statement not covered" >      label = null;</span>
+    } else <span class="cstat-no" title="statement not covered" >if (typeof params === 'function') {</span>
+<span class="cstat-no" title="statement not covered" >      fn = params;</span>
+<span class="cstat-no" title="statement not covered" >      params = null;</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    params = this._translateParams(params);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    params = _.extend({}, this._persistentParams || {}, params);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    params.utc = category || params.utc || this._context.utc;</span>
+<span class="cstat-no" title="statement not covered" >    params.utv = variable || params.utv || this._context.utv;</span>
+<span class="cstat-no" title="statement not covered" >    params.utt = time || params.utt || this._context.utt;</span>
+<span class="cstat-no" title="statement not covered" >    params.utl = label || params.utl || this._context.utl;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this._tidyParameters(params);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return this._withContext(params)._enqueue("timing", params, fn);</span>
+  },
+&nbsp;
+&nbsp;
+  send: <span class="fstat-no" title="function not covered" >function (fn) {</span>
+<span class="cstat-no" title="statement not covered" >    var self = this;</span>
+<span class="cstat-no" title="statement not covered" >    var count = 1;</span>
+<span class="cstat-no" title="statement not covered" >    var fn = fn || <span class="fstat-no" title="function not covered" >function () {</span>};</span>
+<span class="cstat-no" title="statement not covered" >    self._log("Sending " + self._queue.length + " tracking call(s)");</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    var test = <span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >      return self._queue.length &gt; 0;</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    var getBody = <span class="fstat-no" title="function not covered" >function(params) {</span></span>
+<span class="cstat-no" title="statement not covered" >      return params.map(<span class="fstat-no" title="function not covered" >function(x) {</span> <span class="cstat-no" title="statement not covered" >return querystring.stringify(x); </span>}).join("\n");</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    var iterator = <span class="fstat-no" title="function not covered" >function (fn) {</span></span>
+<span class="cstat-no" title="statement not covered" >      var params = [];</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      if(config.batching) {</span>
+<span class="cstat-no" title="statement not covered" >        params = self._queue.splice(0, Math.min(self._queue.length, config.batchSize));</span>
+      } else {
+<span class="cstat-no" title="statement not covered" >        params.push(self._queue.shift());</span>
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      var useBatchPath = params.length &gt; 1;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      var path = config.hostname + (useBatchPath ? config.batchPath :config.path);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      self._log(count++ + ": " + JSON.stringify(params));</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      var options = _.extend({}, self.options.requestOptions, {</span>
+        body: getBody(params),
+        headers: self.options.headers || {}
+      });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      request.post(path, options, fn);</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    async.whilst(test, iterator, <span class="fstat-no" title="function not covered" >function (err) {</span></span>
+<span class="cstat-no" title="statement not covered" >      self._log("Finished sending tracking calls")</span>
+<span class="cstat-no" title="statement not covered" >      fn.call(self, err || null, count - 1);</span>
+    });
+&nbsp;
+  },
+&nbsp;
+  _enqueue: <span class="fstat-no" title="function not covered" >function (type, params, fn) {</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (typeof params === 'function') {</span>
+<span class="cstat-no" title="statement not covered" >      fn = params;</span>
+<span class="cstat-no" title="statement not covered" >      params = {};</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    params = this._translateParams(params) || {};</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    _.extend(params, {</span>
+      v: config.protocolVersion,
+      tid: this.tid,
+      cid: this.cid,
+      t: type
+    });
+<span class="cstat-no" title="statement not covered" >    if(this.uid) {</span>
+<span class="cstat-no" title="statement not covered" >      params.uid = this.uid;</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this._queue.push(params);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (this.options.debug) {</span>
+<span class="cstat-no" title="statement not covered" >      this._checkParameters(params);</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this._log("Enqueued " + type + " (" + JSON.stringify(params) + ")");</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (fn) {</span>
+<span class="cstat-no" title="statement not covered" >      this.send(fn);</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return this;</span>
+  },
+&nbsp;
+&nbsp;
+  _handleError: <span class="fstat-no" title="function not covered" >function (message, fn) {</span>
+<span class="cstat-no" title="statement not covered" >      this._log("Error: " + message)</span>
+<span class="cstat-no" title="statement not covered" >      fn &amp;&amp; fn.call(this, new Error(message))</span>
+<span class="cstat-no" title="statement not covered" >      return this;</span>
+  },
+&nbsp;
+&nbsp;
+&nbsp;
+  _determineCid: <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >    var args = Array.prototype.splice.call(arguments, 0);</span>
+<span class="cstat-no" title="statement not covered" >    var id;</span>
+<span class="cstat-no" title="statement not covered" >    var lastItem = args.length-1;</span>
+<span class="cstat-no" title="statement not covered" >    var strict = args[lastItem];</span>
+<span class="cstat-no" title="statement not covered" >    if (strict) {</span>
+<span class="cstat-no" title="statement not covered" >      for (var i = 0; i &lt; lastItem; i++) {</span>
+<span class="cstat-no" title="statement not covered" >        id = utils.ensureValidCid(args[i]);</span>
+<span class="cstat-no" title="statement not covered" >        if (id !== false) <span class="cstat-no" title="statement not covered" >return id;</span></span>
+<span class="cstat-no" title="statement not covered" >        if (id != null) <span class="cstat-no" title="statement not covered" >this._log("Warning! Invalid UUID format '" + args[i] + "'");</span></span>
+      }
+    } else {
+<span class="cstat-no" title="statement not covered" >      for (var i = 0; i &lt; lastItem; i++) {</span>
+<span class="cstat-no" title="statement not covered" >        if (args[i]) <span class="cstat-no" title="statement not covered" >return args[i];</span></span>
+      }
+    }
+<span class="cstat-no" title="statement not covered" >    return uuid.v4();</span>
+  },
+&nbsp;
+&nbsp;
+  _checkParameters: <span class="fstat-no" title="function not covered" >function (params) {</span>
+<span class="cstat-no" title="statement not covered" >    for (var param in params) {</span>
+<span class="cstat-no" title="statement not covered" >      if (config.acceptedParameters.indexOf(param) !== -1 || config.acceptedParametersRegex.filter(<span class="fstat-no" title="function not covered" >function (r) {</span></span>
+<span class="cstat-no" title="statement not covered" >          return r.test(param);</span>
+        }).length) {
+<span class="cstat-no" title="statement not covered" >        continue;</span>
+      }
+<span class="cstat-no" title="statement not covered" >      this._log("Warning! Unsupported tracking parameter " + param + " (" + params[param] + ")");</span>
+    }
+  },
+&nbsp;
+  _translateParams: <span class="fstat-no" title="function not covered" >function (params) {</span>
+<span class="cstat-no" title="statement not covered" >        var translated = {};</span>
+<span class="cstat-no" title="statement not covered" >        for (var key in params) {</span>
+<span class="cstat-no" title="statement not covered" >            if (config.parametersMap.hasOwnProperty(key)) {</span>
+<span class="cstat-no" title="statement not covered" >                translated[config.parametersMap[key]] = params[key];</span>
+            } else {
+<span class="cstat-no" title="statement not covered" >                translated[key] = params[key];</span>
+            }
+        }
+<span class="cstat-no" title="statement not covered" >        return translated;</span>
+    },
+&nbsp;
+  _tidyParameters: <span class="fstat-no" title="function not covered" >function (params) {</span>
+<span class="cstat-no" title="statement not covered" >    for (var param in params) {</span>
+<span class="cstat-no" title="statement not covered" >      if (params[param] === null || params[param] === undefined) {</span>
+<span class="cstat-no" title="statement not covered" >        delete params[param];</span>
+      }
+    }
+<span class="cstat-no" title="statement not covered" >    return params;</span>
+  },
+&nbsp;
+&nbsp;
+  _log: <span class="fstat-no" title="function not covered" >function (message) {</span>
+<span class="cstat-no" title="statement not covered" >    this.options.debug &amp;&amp; console.log("[universal-analytics] " + message);</span>
+  },
+&nbsp;
+&nbsp;
+  _withContext: <span class="fstat-no" title="function not covered" >function (context) {</span>
+<span class="cstat-no" title="statement not covered" >    var visitor = new Visitor(this.tid, this.cid, this.options, context, this._persistentParams);</span>
+<span class="cstat-no" title="statement not covered" >    visitor._queue = this._queue;</span>
+<span class="cstat-no" title="statement not covered" >    return visitor;</span>
+  }
+&nbsp;
+&nbsp;
+}
+&nbsp;
+Visitor.prototype.pv = Visitor.prototype.pageview
+Visitor.prototype.e = Visitor.prototype.event
+Visitor.prototype.t = Visitor.prototype.transaction
+Visitor.prototype.i = Visitor.prototype.item
+&nbsp;
+&nbsp;</pre></td></tr>
+</table></pre>
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a> at Tue Apr 11 2017 18:15:01 GMT+0000 (UTC)</div>
+</div>
+</body>
+</html>
