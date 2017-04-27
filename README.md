@@ -1,6 +1,6 @@
 # npmtest-universal-analytics
 
-#### test coverage for  [universal-analytics (v0.4.13)](https://github.com/peaksandpies/universal-analytics#readme)  [![npm package](https://img.shields.io/npm/v/npmtest-universal-analytics.svg?style=flat-square)](https://www.npmjs.org/package/npmtest-universal-analytics) [![travis-ci.org build-status](https://api.travis-ci.org/npmtest/node-npmtest-universal-analytics.svg)](https://travis-ci.org/npmtest/node-npmtest-universal-analytics)
+#### basic test coverage for  [universal-analytics (v0.4.13)](https://github.com/peaksandpies/universal-analytics#readme)  [![npm package](https://img.shields.io/npm/v/npmtest-universal-analytics.svg?style=flat-square)](https://www.npmjs.org/package/npmtest-universal-analytics) [![travis-ci.org build-status](https://api.travis-ci.org/npmtest/node-npmtest-universal-analytics.svg)](https://travis-ci.org/npmtest/node-npmtest-universal-analytics)
 
 #### A node module for Google's Universal Analytics tracking
 
@@ -10,7 +10,7 @@
 |--:|:--|
 | coverage : | [![istanbul-coverage](https://npmtest.github.io/node-npmtest-universal-analytics/build/coverage.badge.svg)](https://npmtest.github.io/node-npmtest-universal-analytics/build/coverage.html/index.html)|
 | test-report : | [![test-report](https://npmtest.github.io/node-npmtest-universal-analytics/build/test-report.badge.svg)](https://npmtest.github.io/node-npmtest-universal-analytics/build/test-report.html)|
-| build-artifacts : | [![build-artifacts](https://npmtest.github.io/node-npmtest-universal-analytics/glyphicons_144_folder_open.png)](https://github.com/npmtest/node-npmtest-universal-analytics/tree/gh-pages/build)|
+| test-server-github : | [![github.com test-server](https://npmtest.github.io/node-npmtest-universal-analytics/GitHub-Mark-32px.png)](https://npmtest.github.io/node-npmtest-universal-analytics/build/app/index.html) | | build-artifacts : | [![build-artifacts](https://npmtest.github.io/node-npmtest-universal-analytics/glyphicons_144_folder_open.png)](https://github.com/npmtest/node-npmtest-universal-analytics/tree/gh-pages/build)|
 
 - [https://npmtest.github.io/node-npmtest-universal-analytics/build/coverage.html/index.html](https://npmtest.github.io/node-npmtest-universal-analytics/build/coverage.html/index.html)
 
@@ -82,7 +82,8 @@
     "scripts": {
         "test": "make test"
     },
-    "version": "0.4.13"
+    "version": "0.4.13",
+    "bin": {}
 }
 ```
 
